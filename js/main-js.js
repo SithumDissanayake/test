@@ -1,179 +1,292 @@
-window.onload = async () => {
-  // Put EVERYTHING in here Sithum
-  // I mean EVERYTHING
+$(async () => {
+  async function longPoll() {
       const url = "https://meos.codecadets.com/meos-mop/results-api.php";
       const promise = await fetch(url);
       const data = await promise.json();
-      console.log(data);
-
       const navContent = document.getElementById('navContent');
       const mainResults = document.getElementById('mainResults');
 
       for (var i = 0; i < data.cmpResults.length; i++) {
-        const listItem = document.createElement('li');
-        listItem.classList.add('nav-item')
-        navContent.appendChild(listItem);
-        const listItemLink = document.createElement('a');
-        listItemLink.innerHTML = data.cmpResults[i].clsName;
-        listItemLink.classList.add('nav-link')
-        listItemLink.setAttribute("href", "#" + data.cmpResults[i].clsName);
-        listItem.appendChild(listItemLink);
+          const listItem = document.createElement('li');
+          listItem.classList.add('nav-item')
+          navContent.appendChild(listItem);
+          const listItemLink = document.createElement('a');
+          listItemLink.innerHTML = data.cmpResults[i].clsName;
+          listItemLink.classList.add('nav-link')
+          listItemLink.setAttribute("href", "#" + data.cmpResults[i].clsName);
+          listItem.appendChild(listItemLink);
 
 
 
-        const table = document.createElement('table');
-        table.classList.add('table')
-        table.classList.add('table-striped')
-        table.classList.add('table-dark')
-        table.classList.add('table-bordered')
-        mainResults.appendChild(table);
+          const table = document.createElement('table');
+          table.classList.add('table')
+          table.classList.add('table-striped')
+          table.classList.add('table-dark')
+          table.classList.add('table-bordered')
+          mainResults.appendChild(table);
 
-        const br = document.createElement("br");
-        mainResults.appendChild(br);
+          const br = document.createElement("br");
+          mainResults.appendChild(br);
 
-        const tableHead = document.createElement('thead');
-        table.appendChild(tableHead);
+          const tableHead = document.createElement('thead');
+          table.appendChild(tableHead);
 
-        const tableRowHead = document.createElement('tr');
-        tableHead.appendChild(tableRowHead);
+          const tableRowHead = document.createElement('tr');
+          tableHead.appendChild(tableRowHead);
 
-        const tableRowHeadEvent = document.createElement('th');
-        tableRowHeadEvent.innerHTML = data.cmpResults[i].clsName + ": <span style='font-weight: normal; font-size: 16px'>" + mToKm(data.cmpResults[i].length) + " • " + data.cmpResults[i].course;
-        tableRowHeadEvent.id = data.cmpResults[i].clsName;
-        tableRowHeadEvent.setAttribute("style", "width: 25%");
-        tableRowHeadEvent.setAttribute("scope", "col");
-        tableRowHead.appendChild(tableRowHeadEvent);
+          const tableRowHeadEvent = document.createElement('th');
+          tableRowHeadEvent.innerHTML = data.cmpResults[i].clsName + ": <span style='font-weight: normal; font-size: 16px'>" + mToKm(data.cmpResults[i].length) + " • " + data.cmpResults[i].course;
+          tableRowHeadEvent.id = data.cmpResults[i].clsName;
+          tableRowHeadEvent.setAttribute("style", "width: 25%");
+          tableRowHeadEvent.setAttribute("scope", "col");
+          tableRowHead.appendChild(tableRowHeadEvent);
 
-        const tableRowHeadClub = document.createElement('th');
-        tableRowHeadClub.textContent = "Club";
-        tableRowHeadClub.setAttribute("style", "width: 10%");
-        tableRowHeadClub.setAttribute("scope", "col");
-        tableRowHead.appendChild(tableRowHeadClub);
+          const tableRowHeadClub = document.createElement('th');
+          tableRowHeadClub.textContent = "Club";
+          tableRowHeadClub.setAttribute("style", "width: 10%");
+          tableRowHeadClub.setAttribute("scope", "col");
+          tableRowHead.appendChild(tableRowHeadClub);
 
-        const tableRowHeadTotal = document.createElement('th');
-        tableRowHeadTotal.textContent = "Total Time";
-        tableRowHeadTotal.setAttribute("style", "width: 10%");
-        tableRowHeadTotal.setAttribute("scope", "col");
-        tableRowHead.appendChild(tableRowHeadTotal);
+          const tableRowHeadTotal = document.createElement('th');
+          tableRowHeadTotal.textContent = "Total Time";
+          tableRowHeadTotal.setAttribute("style", "width: 10%");
+          tableRowHeadTotal.setAttribute("scope", "col");
+          tableRowHead.appendChild(tableRowHeadTotal);
 
-        for (var j = 0; j < data.cmpResults[i].radioCount; j++) {
-          const tableRowHeadSplit = document.createElement('th');
-          tableRowHeadSplit.innerHTML = "Split "+ [j+1] + " - " + mToKm(data.cmpResults[i].radioInfo[j].distance);
-          tableRowHeadSplit.setAttribute("style", "width: 20%");
-          tableRowHeadSplit.setAttribute("scope", "col");
-          tableRowHead.appendChild(tableRowHeadSplit);
-        }
+          for (var j = 0; j < data.cmpResults[i].radioCount; j++) {
+              const tableRowHeadSplit = document.createElement('th');
+              tableRowHeadSplit.innerHTML = "Split " + [j + 1] + " - " + mToKm(data.cmpResults[i].radioInfo[j].distance);
+              tableRowHeadSplit.setAttribute("style", "width: 20%");
+              tableRowHeadSplit.setAttribute("scope", "col");
+              tableRowHead.appendChild(tableRowHeadSplit);
+          }
 
-        const tableBody = document.createElement('tbody');
-        table.appendChild(tableBody);
+          const tableBody = document.createElement('tbody');
+          table.appendChild(tableBody);
 
-        for (var k = 0; k < data.cmpResults[i].clsResults.length; k++) {
-          const tableRowBody = document.createElement('tr');
-          tableBody.appendChild(tableRowBody);
+          for (var k = 0; k < data.cmpResults[i].clsResults.length; k++) {
+              const tableRowBody = document.createElement('tr');
+              tableBody.appendChild(tableRowBody);
 
-          const tableRowCellName = document.createElement('td');
-          tableRowCellName.innerHTML = data.cmpResults[i].clsResults[k].competitor;
-          tableRowCellName.setAttribute("style", "width: 25%");
-          tableRowCellName.setAttribute("scope", "row");
-          tableRowBody.appendChild(tableRowCellName);
+              const tableRowCellName = document.createElement('td');
+              tableRowCellName.innerHTML = data.cmpResults[i].clsResults[k].competitor;
+              tableRowCellName.setAttribute("style", "width: 25%");
+              tableRowCellName.setAttribute("scope", "row");
+              tableRowBody.appendChild(tableRowCellName);
 
-          const tableRowCellClub = document.createElement('td');
-          tableRowCellClub.innerHTML = data.cmpResults[i].clsResults[k].club;
-          tableRowCellClub.setAttribute("style", "width: 10%");
-          tableRowBody.appendChild(tableRowCellClub);
+              const tableRowCellClub = document.createElement('td');
+              tableRowCellClub.innerHTML = data.cmpResults[i].clsResults[k].club;
+              tableRowCellClub.setAttribute("style", "width: 10%");
+              tableRowBody.appendChild(tableRowCellClub);
 
-          const tableRowCellFinshTime = document.createElement('td');
-          tableRowCellFinshTime.innerHTML = data.cmpResults[i].clsResults[k].finishTime + " <span style='font-size:10px'>" + nullCheck(data.cmpResults[i].clsResults[k].finishDiff);
-          tableRowCellFinshTime.setAttribute("style", "width: 10%");
-          tableRowBody.appendChild(tableRowCellFinshTime);
+              const tableRowCellFinshTime = document.createElement('td');
+              tableRowCellFinshTime.innerHTML = data.cmpResults[i].clsResults[k].finishTime + " <span style='font-size:10px'>" + nullCheck(data.cmpResults[i].clsResults[k].finishDiff);
+              tableRowCellFinshTime.setAttribute("style", "width: 10%");
+              tableRowBody.appendChild(tableRowCellFinshTime);
 
-          for (var l = 0; l < data.cmpResults[i].radioCount; l++) {
-            const tableRowCellSplit = document.createElement('td');
-            tableRowCellSplit.innerHTML = nullCheck(data.cmpResults[i].clsResults[k].radios[l].time) + " " + nullCheckRank(data.cmpResults[i].clsResults[k].radios[l].rank) + " <span style='font-size:10px'>" + nullCheck(data.cmpResults[i].clsResults[k].radios[l].diff);
-            tableRowCellSplit.setAttribute("style", "width: 20%");
-            tableRowBody.appendChild(tableRowCellSplit);
+              for (var l = 0; l < data.cmpResults[i].radioCount; l++) {
+                  const tableRowCellSplit = document.createElement('td');
+                  tableRowCellSplit.innerHTML = nullCheck(data.cmpResults[i].clsResults[k].radios[l].time) + " " + nullCheckRank(data.cmpResults[i].clsResults[k].radios[l].rank) + " <span style='font-size:10px'>" + nullCheck(data.cmpResults[i].clsResults[k].radios[l].diff);
+                  tableRowCellSplit.setAttribute("style", "width: 20%");
+                  tableRowBody.appendChild(tableRowCellSplit);
+              }
+          }
+
+      }
+
+      function mToKm(valNum) {
+          var km = valNum / 1000;;
+          return km.toFixed(1) + " km";
+      }
+
+      function nullCheck(valNum) {
+          if (valNum == null) {
+              return ""
+          } else {
+              return valNum
           }
       }
 
-    }
-      function mToKm(valNum) {
-        var km = valNum/1000;;
-        return km.toFixed(1) + " km";
-      }
-      function nullCheck(valNum) {
-        if (valNum == null) {
-          return ""
-        }
-        else {
-          return valNum
-        }
-      }
       function nullCheckRank(valNum) {
-        if (valNum == null) {
-          return ""
-        }
-        else {
-          return "(" + valNum + ")"
-        }
+          if (valNum == null) {
+              return ""
+          } else {
+              return "(" + valNum + ")"
+          }
       }
-  // Use `data` as a JavaScript object
-  // Contact me if issues - I'm good with `forEach` and `map`ping over things
-  // Arrays, particularly of objects, are my speciality because I can make it look simple
-};
+  };
+  let data = await longPoll();
+  setInterval(async () => data = await longPoll(), 30000);
+});
 
-  // const title = document.createElement('h1');
-  // title.textContent = data.cmpName;
-  // title.classList.add('jumbotron')
-  // title.classList.add('text-center')
-  // title.style.backgroundColor = "#3B762E";
-  // title.style.color = "white";
-  // title.style.marginBottom = "0";
-  // app.appendChild(title);
-  // const nav = document.createElement('nav');
-  // nav.classList.add('navbar')
-  // nav.classList.add('navbar-expand-sm')
-  // nav.classList.add('navbar-custom')
-  // nav.classList.add('navbar-dark')
-  // app.appendChild(nav);
-  // const navA = document.createElement('a');
-  // navA.classList.add('navbar-brand')
-  // nav.appendChild(navA);
-  // const navButton = document.createElement('button');
-  // navButton.innerHTML = "<span class='navbar-toggler-icon'></span>";
-  // navButton.classList.add('navbar-toggler')
-  // navButton.setAttribute("type", "button");
-  // navButton.setAttribute("data-toggle", "collapse");
-  // navButton.setAttribute("data-target", "#navbarText");
-  // navButton.setAttribute("aria-controls", "navbarText");
-  // navButton.setAttribute("aria-expanded", "false");
-  // navButton.setAttribute("aria-label", "Toggle navigation");
-  // nav.appendChild(navButton);
-  // const navContent = document.createElement('div')
-  // navContent.classList.add('collapse')
-  // navContent.classList.add('navbar-collapse')
-  // navContent.id = "navbarText"
-  // nav.appendChild(navContent);
-  // const navList = document.createElement('ul')
-  // navContent.classList.add('nav')
-  // navContent.classList.add('navbar-nav')
-  // navContent.classList.add('ml-auto')
-  // navContent.appendChild(navList);
+// window.onload = async () => {
+//   // Put EVERYTHING in here Sithum
+//   // I mean EVERYTHING
+//       const url = "https://meos.codecadets.com/meos-mop/results-api.php";
+//       const promise = await fetch(url);
+//       const data = await promise.json();
+//       console.log(data);
 
+//       const navContent = document.getElementById('navContent');
+//       const mainResults = document.getElementById('mainResults');
 
-  // const navListItem = document.createElement('li')
-  // navListItem.classList.add('nav-item')
-  // navList.appendChild(navListItem);
-  // const navListItemLink = document.createElement('li')
-
-  // navListItem.appendChild(navListItemLink);
+//       for (var i = 0; i < data.cmpResults.length; i++) {
+//         const listItem = document.createElement('li');
+//         listItem.classList.add('nav-item')
+//         navContent.appendChild(listItem);
+//         const listItemLink = document.createElement('a');
+//         listItemLink.innerHTML = data.cmpResults[i].clsName;
+//         listItemLink.classList.add('nav-link')
+//         listItemLink.setAttribute("href", "#" + data.cmpResults[i].clsName);
+//         listItem.appendChild(listItemLink);
 
 
 
+//         const table = document.createElement('table');
+//         table.classList.add('table')
+//         table.classList.add('table-striped')
+//         table.classList.add('table-dark')
+//         table.classList.add('table-bordered')
+//         mainResults.appendChild(table);
+
+//         const br = document.createElement("br");
+//         mainResults.appendChild(br);
+
+//         const tableHead = document.createElement('thead');
+//         table.appendChild(tableHead);
+
+//         const tableRowHead = document.createElement('tr');
+//         tableHead.appendChild(tableRowHead);
+
+//         const tableRowHeadEvent = document.createElement('th');
+//         tableRowHeadEvent.innerHTML = data.cmpResults[i].clsName + ": <span style='font-weight: normal; font-size: 16px'>" + mToKm(data.cmpResults[i].length) + " • " + data.cmpResults[i].course;
+//         tableRowHeadEvent.id = data.cmpResults[i].clsName;
+//         tableRowHeadEvent.setAttribute("style", "width: 25%");
+//         tableRowHeadEvent.setAttribute("scope", "col");
+//         tableRowHead.appendChild(tableRowHeadEvent);
+
+//         const tableRowHeadClub = document.createElement('th');
+//         tableRowHeadClub.textContent = "Club";
+//         tableRowHeadClub.setAttribute("style", "width: 10%");
+//         tableRowHeadClub.setAttribute("scope", "col");
+//         tableRowHead.appendChild(tableRowHeadClub);
+
+//         const tableRowHeadTotal = document.createElement('th');
+//         tableRowHeadTotal.textContent = "Total Time";
+//         tableRowHeadTotal.setAttribute("style", "width: 10%");
+//         tableRowHeadTotal.setAttribute("scope", "col");
+//         tableRowHead.appendChild(tableRowHeadTotal);
+
+//         for (var j = 0; j < data.cmpResults[i].radioCount; j++) {
+//           const tableRowHeadSplit = document.createElement('th');
+//           tableRowHeadSplit.innerHTML = "Split "+ [j+1] + " - " + mToKm(data.cmpResults[i].radioInfo[j].distance);
+//           tableRowHeadSplit.setAttribute("style", "width: 20%");
+//           tableRowHeadSplit.setAttribute("scope", "col");
+//           tableRowHead.appendChild(tableRowHeadSplit);
+//         }
+
+//         const tableBody = document.createElement('tbody');
+//         table.appendChild(tableBody);
+
+//         for (var k = 0; k < data.cmpResults[i].clsResults.length; k++) {
+//           const tableRowBody = document.createElement('tr');
+//           tableBody.appendChild(tableRowBody);
+
+//           const tableRowCellName = document.createElement('td');
+//           tableRowCellName.innerHTML = data.cmpResults[i].clsResults[k].competitor;
+//           tableRowCellName.setAttribute("style", "width: 25%");
+//           tableRowCellName.setAttribute("scope", "row");
+//           tableRowBody.appendChild(tableRowCellName);
+
+//           const tableRowCellClub = document.createElement('td');
+//           tableRowCellClub.innerHTML = data.cmpResults[i].clsResults[k].club;
+//           tableRowCellClub.setAttribute("style", "width: 10%");
+//           tableRowBody.appendChild(tableRowCellClub);
+
+//           const tableRowCellFinshTime = document.createElement('td');
+//           tableRowCellFinshTime.innerHTML = data.cmpResults[i].clsResults[k].finishTime + " <span style='font-size:10px'>" + nullCheck(data.cmpResults[i].clsResults[k].finishDiff);
+//           tableRowCellFinshTime.setAttribute("style", "width: 10%");
+//           tableRowBody.appendChild(tableRowCellFinshTime);
+
+//           for (var l = 0; l < data.cmpResults[i].radioCount; l++) {
+//             const tableRowCellSplit = document.createElement('td');
+//             tableRowCellSplit.innerHTML = nullCheck(data.cmpResults[i].clsResults[k].radios[l].time) + " " + nullCheckRank(data.cmpResults[i].clsResults[k].radios[l].rank) + " <span style='font-size:10px'>" + nullCheck(data.cmpResults[i].clsResults[k].radios[l].diff);
+//             tableRowCellSplit.setAttribute("style", "width: 20%");
+//             tableRowBody.appendChild(tableRowCellSplit);
+//           }
+//       }
+
+//     }
+//       function mToKm(valNum) {
+//         var km = valNum/1000;;
+//         return km.toFixed(1) + " km";
+//       }
+//       function nullCheck(valNum) {
+//         if (valNum == null) {
+//           return ""
+//         }
+//         else {
+//           return valNum
+//         }
+//       }
+//       function nullCheckRank(valNum) {
+//         if (valNum == null) {
+//           return ""
+//         }
+//         else {
+//           return "(" + valNum + ")"
+//         }
+//       }
+//   // Use `data` as a JavaScript object
+//   // Contact me if issues - I'm good with `forEach` and `map`ping over things
+//   // Arrays, particularly of objects, are my speciality because I can make it look simple
+// };
+
+// const title = document.createElement('h1');
+// title.textContent = data.cmpName;
+// title.classList.add('jumbotron')
+// title.classList.add('text-center')
+// title.style.backgroundColor = "#3B762E";
+// title.style.color = "white";
+// title.style.marginBottom = "0";
+// app.appendChild(title);
+// const nav = document.createElement('nav');
+// nav.classList.add('navbar')
+// nav.classList.add('navbar-expand-sm')
+// nav.classList.add('navbar-custom')
+// nav.classList.add('navbar-dark')
+// app.appendChild(nav);
+// const navA = document.createElement('a');
+// navA.classList.add('navbar-brand')
+// nav.appendChild(navA);
+// const navButton = document.createElement('button');
+// navButton.innerHTML = "<span class='navbar-toggler-icon'></span>";
+// navButton.classList.add('navbar-toggler')
+// navButton.setAttribute("type", "button");
+// navButton.setAttribute("data-toggle", "collapse");
+// navButton.setAttribute("data-target", "#navbarText");
+// navButton.setAttribute("aria-controls", "navbarText");
+// navButton.setAttribute("aria-expanded", "false");
+// navButton.setAttribute("aria-label", "Toggle navigation");
+// nav.appendChild(navButton);
+// const navContent = document.createElement('div')
+// navContent.classList.add('collapse')
+// navContent.classList.add('navbar-collapse')
+// navContent.id = "navbarText"
+// nav.appendChild(navContent);
+// const navList = document.createElement('ul')
+// navContent.classList.add('nav')
+// navContent.classList.add('navbar-nav')
+// navContent.classList.add('ml-auto')
+// navContent.appendChild(navList);
 
 
+// const navListItem = document.createElement('li')
+// navListItem.classList.add('nav-item')
+// navList.appendChild(navListItem);
+// const navListItemLink = document.createElement('li')
 
-
-
+// navListItem.appendChild(navListItemLink);
 
 
 
