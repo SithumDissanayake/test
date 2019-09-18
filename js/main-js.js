@@ -24,6 +24,8 @@ window.onload = async () => {
         const table = document.createElement('table');
         table.classList.add('table')
         table.classList.add('table-striped')
+        table.classList.add('table-dark')
+        table.classList.add('table-bordered')
         mainResults.appendChild(table);
         const tableRowHead = document.createElement('tr');
         table.appendChild(tableRowHead);
@@ -31,23 +33,27 @@ window.onload = async () => {
         const tableRowHeadEvent = document.createElement('th');
         tableRowHeadEvent.innerHTML = data.cmpResults[i].clsName + ": <span style='font-weight: normal; font-size: 16px'>" + mToKm(data.cmpResults[i].length) + " • " + data.cmpResults[i].course;
         tableRowHeadEvent.id = data.cmpResults[i].clsName;
-        tableRowHeadEvent.setAttribute("style", "width: 30%");
+        tableRowHeadEvent.setAttribute("style", "width: 25%");
+        tableRowHeadEvent.setAttribute("scope", "col");
         tableRowHead.appendChild(tableRowHeadEvent);
 
         const tableRowHeadClub = document.createElement('th');
-        tableRowHeadClub.setAttribute("style", "width: 10%");
         tableRowHeadClub.textContent = "Club";
+        tableRowHeadClub.setAttribute("style", "width: 10%");
+        tableRowHeadClub.setAttribute("scope", "col");
         tableRowHead.appendChild(tableRowHeadClub);
 
         const tableRowHeadTotal = document.createElement('th');
-        tableRowHeadTotal.setAttribute("style", "width: 10%");
         tableRowHeadTotal.textContent = "Total Time";
+        tableRowHeadTotal.setAttribute("style", "width: 10%");
+        tableRowHeadTotal.setAttribute("scope", "col");
         tableRowHead.appendChild(tableRowHeadTotal);
 
         for (var j = 0; j < data.cmpResults[i].radioCount; j++) {
           const tableRowHeadSplit = document.createElement('th');
           tableRowHeadSplit.innerHTML = "Split "+ [j+1] + " - " + mToKm(data.cmpResults[i].radioInfo[j].distance);
           tableRowHeadSplit.setAttribute("style", "width: 20%");
+          tableRowHeadSplit.setAttribute("scope", "col");
           tableRowHead.appendChild(tableRowHeadSplit);
         }
 
@@ -57,7 +63,7 @@ window.onload = async () => {
 
           const tableRowCellName = document.createElement('td');
           tableRowCellName.innerHTML = data.cmpResults[i].clsResults[k].competitor;
-          tableRowCellName.setAttribute("style", "width: 30%");
+          tableRowCellName.setAttribute("style", "width: 25%");
           tableRowCellName.setAttribute("scope", "row");
           tableRowBody.appendChild(tableRowCellName);
 
