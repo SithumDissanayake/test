@@ -27,8 +27,15 @@ window.onload = async () => {
         table.classList.add('table-dark')
         table.classList.add('table-bordered')
         mainResults.appendChild(table);
+
+        const br = document.createElement("br");
+        mainResults.appendChild(br);
+
+        const tableHead = document.createElement('thead');
+        table.appendChild(tableHead);
+
         const tableRowHead = document.createElement('tr');
-        table.appendChild(tableRowHead);
+        tableHead.appendChild(tableRowHead);
 
         const tableRowHeadEvent = document.createElement('th');
         tableRowHeadEvent.innerHTML = data.cmpResults[i].clsName + ": <span style='font-weight: normal; font-size: 16px'>" + mToKm(data.cmpResults[i].length) + " • " + data.cmpResults[i].course;
@@ -57,9 +64,12 @@ window.onload = async () => {
           tableRowHead.appendChild(tableRowHeadSplit);
         }
 
+        const tableBody = document.createElement('tbody');
+        table.appendChild(tableBody);
+
         for (var k = 0; k < data.cmpResults[i].clsResults.length; k++) {
           const tableRowBody = document.createElement('tr');
-          table.appendChild(tableRowBody);
+          tableBody.appendChild(tableRowBody);
 
           const tableRowCellName = document.createElement('td');
           tableRowCellName.innerHTML = data.cmpResults[i].clsResults[k].competitor;
@@ -84,8 +94,7 @@ window.onload = async () => {
             tableRowBody.appendChild(tableRowCellSplit);
           }
       }
-      const br = document.createElement("br");
-      table.appendChild(br);
+
     }
       function mToKm(valNum) {
         var km = valNum/1000;;
