@@ -10,6 +10,17 @@ window.onload = async () => {
       const mainResults = document.getElementById('mainResults');
 
       for (var i = 0; i < data.cmpResults.length; i++) {
+        const listItem = document.createElement('li');
+        listItem.classList.add('nav-item')
+        navContent.appendChild(listItem);
+        const listItemLink = document.createElement('a');
+        listItemLink.innerHTML = data.cmpResults[i].clsName;
+        listItemLink.classList.add('nav-link')
+        listItemLink.setAttribute("href", "#" + data.cmpResults[i].clsName);
+        listItem.appendChild(listItemLink);
+
+
+
         const table = document.createElement('table');
         table.classList.add('table')
         table.classList.add('table-striped')
@@ -19,6 +30,7 @@ window.onload = async () => {
 
         const tableRowHeadEvent = document.createElement('th');
         tableRowHeadEvent.innerHTML = data.cmpResults[i].clsName + ": <span style='font-weight: normal; font-size: 16px'>" + mToKm(data.cmpResults[i].length) + " • " + data.cmpResults[i].course;
+        tableRowHeadEvent.id = data.cmpResults[i].clsName;
         tableRowHeadEvent.setAttribute("style", "width: 30%");
         tableRowHead.appendChild(tableRowHeadEvent);
 
