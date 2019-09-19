@@ -37,3 +37,14 @@ td {
     font-size: 14px;
     vertical-align: middle !important;
 }
+
+.btn {
+	margin: 5px 0;
+	background-color: white;
+	color: #222f3e;
+}
+.btn:hover{
+	border: 1px solid #222f3e;
+	background-color: #222f3e !important;
+	color: white;
+}

@@ -124,12 +124,18 @@ navContent.appendChild(navList);
         tableBody.appendChild(tableRowBottem)
 
           const tableRowCellBottem = document.createElement('td');
-          tableRowCellBottem.innerHTML = "Back to Top"
-          tableRowCellBottem.classList.add('button')
           tableRowCellBottem.classList.add('text-center')
           tableRowCellBottem.setAttribute("colspan", 3 + data.cmpResults[i].radioCount);
           tableRowCellBottem.setAttribute("scope", "row");
           tableRowBottem.appendChild(tableRowCellBottem);
+
+          const tableRowCellBottemButton = document.createElement('a');
+          tableRowCellBottemButton.innerHTML = "Back to Top"
+          tableRowCellBottemButton.setAttribute("href", "#");
+          tableRowCellBottemButton.setAttribute("role", "button");
+          tableRowCellBottemButton.classList.add('btn');
+          tableRowCellBottemButton.classList.add('btn-lg')
+          tableRowCellBottem.appendChild(tableRowCellBottemButton);
 
       }
 
