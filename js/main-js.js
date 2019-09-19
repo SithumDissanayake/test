@@ -3,14 +3,42 @@ $(async () => {
       const url = "https://meos.codecadets.com/meos-mop/results-api.php";
       const promise = await fetch(url);
       const data = await promise.json();
-      const navContent = document.getElementById('navContent');
+      const NavBar = document.getElementById('NavBar');
       const mainResults = document.getElementById('mainResults');
       console.log("Poll")
+
+      $("#NavBar").html("");
+const navA = document.createElement('a');
+navA.classList.add('navbar-brand')
+navA.setAttribute("href", "#");
+navA.textContent = "Events: ";
+NavBar.appendChild(navA);
+const navButton = document.createElement('button');
+navButton.innerHTML = "<span class='navbar-toggler-icon'></span>";
+navButton.classList.add('navbar-toggler')
+navButton.setAttribute("type", "button");
+navButton.setAttribute("data-toggle", "collapse");
+navButton.setAttribute("data-target", "#navbarText");
+navButton.setAttribute("aria-controls", "navbarText");
+navButton.setAttribute("aria-expanded", "false");
+navButton.setAttribute("aria-label", "Toggle navigation");
+NavBar.appendChild(navButton);
+const navContent = document.createElement('div')
+navContent.classList.add('collapse')
+navContent.classList.add('navbar-collapse')
+navContent.id = "navbarText"
+NavBar.appendChild(navContent);
+const navList = document.createElement('ul')
+navList.classList.add('nav')
+navList.classList.add('navbar-nav')
+navList.classList.add('ml-auto')
+navContent.appendChild(navList);
+
 
       for (var i = 0; i < data.cmpResults.length; i++) {
           const listItem = document.createElement('li');
           listItem.classList.add('nav-item')
-          navContent.appendChild(listItem);
+          navList.appendChild(listItem);
           const listItemLink = document.createElement('a');
           listItemLink.innerHTML = data.cmpResults[i].clsName;
           listItemLink.classList.add('nav-link')
@@ -92,6 +120,16 @@ $(async () => {
                   tableRowBody.appendChild(tableRowCellSplit);
               }
           }
+        const tableRowBottem = document.createElement('tr');
+        tableBody.appendChild(tableRowBottem)
+
+          const tableRowCellBottem = document.createElement('td');
+          tableRowCellBottem.innerHTML = "Back to Top"
+          tableRowCellBottem.classList.add('button')
+          tableRowCellBottem.classList.add('text-center')
+          tableRowCellBottem.setAttribute("colspan", 3 + data.cmpResults[i].radioCount);
+          tableRowCellBottem.setAttribute("scope", "row");
+          tableRowBottem.appendChild(tableRowCellBottem);
 
       }
 
