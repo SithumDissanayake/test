@@ -109,7 +109,7 @@ navContent.appendChild(navList);
               tableRowBody.appendChild(tableRowCellClub);
 
               const tableRowCellFinshTime = document.createElement('td');
-              tableRowCellFinshTime.innerHTML = data.cmpResults[i].clsResults[k].finishTime + " <span style='font-size:10px'>" + nullCheck(data.cmpResults[i].clsResults[k].finishDiff);
+              tableRowCellFinshTime.innerHTML = nullCheck(data.cmpResults[i].clsResults[k].finishTime) + " <span style='font-size:10px'>" + nullCheck(data.cmpResults[i].clsResults[k].finishDiff);
               tableRowCellFinshTime.setAttribute("style", "width: 10%");
               tableRowBody.appendChild(tableRowCellFinshTime);
 
@@ -147,7 +147,11 @@ navContent.appendChild(navList);
       function nullCheck(valNum) {
           if (valNum == null) {
               return ""
-          } else {
+          }
+          else if (valNum == "null") {
+                return ""
+          }
+            else {
               return valNum
           }
       }
