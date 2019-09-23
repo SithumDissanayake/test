@@ -34,10 +34,16 @@ navRow.classList.add('row')
 navContent.appendChild(navRow);
 
 const navColM = document.createElement('div')
-navColM.classList.add('col-6')
+navColM.classList.add('col-4')
+navColM.classList.add('text-left')
 navRow.appendChild(navColM);
+const navCol = document.createElement('div')
+navCol.classList.add('col-4')
+navCol.classList.add('text-center')
+navRow.appendChild(navCol);
 const navColW = document.createElement('div')
-navColW.classList.add('col-6')
+navColW.classList.add('col-4')
+navColW.classList.add('text-right')
 navRow.appendChild(navColW);
 
 const navListM = document.createElement('ul')
@@ -45,33 +51,17 @@ navListM.classList.add('nav')
 navListM.classList.add('navbar-nav')
 navListM.classList.add('ml-auto')
 navColM.appendChild(navListM);
-const navListW = document.createElement('ul')
-navListW.classList.add('nav')
-navListW.classList.add('navbar-nav')
-navListW.classList.add('ml-auto')
-navListW.classList.add('text-right')
-navColW.appendChild(navListW);
-
-const navRow2 = document.createElement('div')
-navRow2.classList.add('row')
-navContent.appendChild(navRow2);
-
-const navCol1 = document.createElement('div')
-navCol1.classList.add('col-3')
-navRow2.appendChild(navCol1);
-const navColMain = document.createElement('div')
-navColMain.classList.add('col-6')
-navColMain.classList.add('text-center')
-navRow2.appendChild(navColMain);
-const navCol3 = document.createElement('div')
-navCol3.classList.add('col-3')
-navRow2.appendChild(navCol3);
-
 const navList = document.createElement('ul')
 navList.classList.add('nav')
 navList.classList.add('navbar-nav')
 navList.classList.add('ml-auto')
-navColMain.appendChild(navList);
+navCol.appendChild(navList);
+const navListW = document.createElement('ul')
+navListW.classList.add('nav')
+navListW.classList.add('navbar-nav')
+navListW.classList.add('ml-auto')
+navColW.appendChild(navListW);
+
 
 
 
