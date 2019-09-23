@@ -28,22 +28,95 @@ navContent.classList.add('collapse')
 navContent.classList.add('navbar-collapse')
 navContent.id = "navbarText"
 NavBar.appendChild(navContent);
+
+const navRow = document.createElement('div')
+navRow.classList.add('row')
+navContent.appendChild(navRow);
+
+const navColM = document.createElement('div')
+navColM.classList.add('col-6')
+navRow.appendChild(navColM);
+const navColW = document.createElement('div')
+navColW.classList.add('col-6')
+navRow.appendChild(navColW);
+
+const navListM = document.createElement('ul')
+navListM.classList.add('nav')
+navListM.classList.add('navbar-nav')
+navListM.classList.add('ml-auto')
+navColM.appendChild(navListM);
+const navListW = document.createElement('ul')
+navListW.classList.add('nav')
+navListW.classList.add('navbar-nav')
+navListW.classList.add('ml-auto')
+navListW.classList.add('text-right')
+navColW.appendChild(navListW);
+
+const navRow2 = document.createElement('div')
+navRow2.classList.add('row')
+navContent.appendChild(navRow2);
+
+const navCol1 = document.createElement('div')
+navCol1.classList.add('col-3')
+navRow2.appendChild(navCol1);
+const navColMain = document.createElement('div')
+navColMain.classList.add('col-6')
+navColMain.classList.add('text-center')
+navRow2.appendChild(navColMain);
+const navCol3 = document.createElement('div')
+navCol3.classList.add('col-3')
+navRow2.appendChild(navCol3);
+
 const navList = document.createElement('ul')
 navList.classList.add('nav')
 navList.classList.add('navbar-nav')
 navList.classList.add('ml-auto')
-navContent.appendChild(navList);
+navColMain.appendChild(navList);
+
 
 
       for (var i = 0; i < data.cmpResults.length; i++) {
-          const listItem = document.createElement('li');
-          listItem.classList.add('nav-item')
-          navList.appendChild(listItem);
-          const listItemLink = document.createElement('a');
-          listItemLink.innerHTML = data.cmpResults[i].clsName;
-          listItemLink.classList.add('nav-link')
-          listItemLink.setAttribute("href", "#" + data.cmpResults[i].clsName);
-          listItem.appendChild(listItemLink);
+          if (data.cmpResults[i].clsName.slice(0, 3) == "M/W") {
+            const listItem = document.createElement('li');
+            listItem.classList.add('nav-item')
+            navList.appendChild(listItem);
+            const listItemLink = document.createElement('a');
+            listItemLink.innerHTML = data.cmpResults[i].clsName;
+            listItemLink.classList.add('nav-link')
+            listItemLink.setAttribute("href", "#" + data.cmpResults[i].clsName);
+            navList.appendChild(listItemLink);
+          }
+          else if (data.cmpResults[i].clsName.charAt(0) == "M") {
+            const listItemM = document.createElement('li');
+            listItemM.classList.add('nav-item')
+            navListM.appendChild(listItemM);
+            const listItemLinkM = document.createElement('a');
+            listItemLinkM.innerHTML = data.cmpResults[i].clsName;
+            listItemLinkM.classList.add('nav-link')
+            listItemLinkM.setAttribute("href", "#" + data.cmpResults[i].clsName);
+            listItemM.appendChild(listItemLinkM);
+          }
+          else if (data.cmpResults[i].clsName.charAt(0) == "W") {
+            const listItemW = document.createElement('li');
+            listItemW.classList.add('nav-item')
+            navListW.appendChild(listItemW);
+            const listItemLinkW = document.createElement('a');
+            listItemLinkW.innerHTML = data.cmpResults[i].clsName;
+            listItemLinkW.classList.add('nav-link')
+            listItemLinkW.setAttribute("href", "#" + data.cmpResults[i].clsName);
+            listItemW.appendChild(listItemLinkW);
+          }
+          else {
+            const listItem = document.createElement('li');
+            listItem.classList.add('nav-item')
+            navList.appendChild(listItem);
+            const listItemLink = document.createElement('a');
+            listItemLink.innerHTML = data.cmpResults[i].clsName;
+            listItemLink.classList.add('nav-link')
+            listItemLink.setAttribute("href", "#" + data.cmpResults[i].clsName);
+            navList.appendChild(listItemLink);
+          }
+
 
 
 
@@ -138,7 +211,9 @@ navContent.appendChild(navList);
           tableRowCellBottem.appendChild(tableRowCellBottemButton);
 
       }
+      function maleOrWomen() {
 
+      }
       function mToKm(valNum) {
           var km = valNum / 1000;;
           return km.toFixed(1) + " km";
