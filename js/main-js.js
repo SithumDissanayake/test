@@ -73,7 +73,7 @@ navColW.appendChild(navListW);
             const listItemLink = document.createElement('a');
             listItemLink.innerHTML = data.cmpResults[i].clsName;
             listItemLink.classList.add('nav-link')
-            listItemLink.setAttribute("href", "#" + data.cmpResults[i].clsName);
+            listItemLink.setAttribute("href", "#" + removeSlashes(data.cmpResults[i].clsName));
             navList.appendChild(listItemLink);
           }
           else if (data.cmpResults[i].clsName.charAt(0) == "M") {
@@ -128,7 +128,7 @@ navColW.appendChild(navListW);
 
           const tableRowHeadEvent = document.createElement('th');
           tableRowHeadEvent.innerHTML = data.cmpResults[i].clsName + ": <span style='font-weight: normal; font-size: 16px'>" + mToKm(data.cmpResults[i].length) + " • " + data.cmpResults[i].course;
-          tableRowHeadEvent.id = data.cmpResults[i].clsName;
+          tableRowHeadEvent.id = removeSlashes(data.cmpResults[i].clsName);
           tableRowHeadEvent.setAttribute("style", "width: 25%");
           tableRowHeadEvent.setAttribute("scope", "col");
           tableRowHead.appendChild(tableRowHeadEvent);
@@ -201,8 +201,8 @@ navColW.appendChild(navListW);
           tableRowCellBottem.appendChild(tableRowCellBottemButton);
 
       }
-      function maleOrWomen() {
-
+      function removeSlashes(valNum) {
+        return valNum.replace(/\//g,'');
       }
       function mToKm(valNum) {
           var km = valNum / 1000;;
